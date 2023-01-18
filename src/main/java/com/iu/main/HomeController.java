@@ -1,15 +1,23 @@
 package com.iu.main;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.parsing.Location;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.iu.main.departments.DepartmentDAO;
+import com.iu.main.departments.DepartmentDTO;
+import com.iu.main.locations.LocationDAO;
+import com.iu.main.locations.LocationDTO;
 
 /**
  * Handles requests for the application home page.
@@ -35,5 +43,24 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	@RequestMapping("departments")
+	public void getDepartments(Model model)throws Exception {
+		
+		DepartmentDAO departmentDAO  = new DepartmentDAO();
+		ArrayList<DepartmentDTO> ar = departmentDAO.getList();
+		
+		model.addAttribute("list",ar);
+		
+	}
+	
+	@RequestMapping("locations")
+	@ResponseBody
+	public ArrayList<LocationDTO> getLocations() throws Exception{
+		LocationDAO locationDAO = new LocationDAO();
+		ArrayList<LocationDTO> ar = locationDAO.getList();
+		return ar;
+	}
+		
 	
 }
