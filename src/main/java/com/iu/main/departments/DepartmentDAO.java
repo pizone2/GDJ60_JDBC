@@ -10,7 +10,117 @@ import javax.naming.spi.DirStateFactory.Result;
 
 import com.iu.main.util.DBConnection;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 public class DepartmentDAO {
+	
+	//update
+	
+	public int updateData(DepartmentDTO departmentDTO) throws Exception{
+		Connection con = DBConnection.getConnection();
+		
+		String sql = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME=?,MANAGER_ID=?,LOCATION_ID=? "
+				+ "WHERE DEPARTMENT_ID=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1,departmentDTO.getDepartment_name() );
+		st.setInt(2, departmentDTO.getManager_id());
+		st.setInt(3, departmentDTO.getLocation_id());
+		st.setInt(4, departmentDTO.getDepartment_id());
+		
+		int result = st.executeUpdate();
+		
+		DBConnection.disConnect(st, con);
+		
+		return result;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//delete
+	public int deleteData(DepartmentDTO departmentDTO) throws Exception{
+		//연결
+		Connection connection = DBConnection.getConnection();
+		//sql문 작성
+		String sql = "DELETE DEPARTMENTS WHERE DEPARTMENT_ID=?";
+		
+		PreparedStatement st = connection.prepareStatement(sql);
+		
+		st.setInt(1, departmentDTO.getDepartment_id());
+		
+		int result = st.executeUpdate();
+		
+		DBConnection.disConnect(st, connection);
+		
+		return result;
+		
+	}
+	//1.Execute 
+	// Boolean 타입의 값을 반환,모든 구문사용
+	//2.ExecuteQuery
+	// ResultSet 객체의 값을 반환,SELECT문에서 사용
+	//3.ExecuteUpdate
+	//int 타입의 값을 반환 ,SELECT를 제외한 다른 구문에서 사용
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//insert
+	public int setData (DepartmentDTO departmentDTO) throws Exception {
+		Connection con = DBConnection.getConnection();
+		
+//		String sql ="INSERT INTO DEPARTMENTS (DEPARTMENT_ID"
+//				+ ",DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID)"
+//				+ " VALUES(DEPARTMENT_SEQ.NEXTVAL,?,?,?)";
+		
+		String sql = "INSERT INTO DEPARTMENTS (DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID)"
+				+ " VALUES (DEPARTMENTS_SEQ.NEXTVAL,?,?,?)";
+		
+		
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		//?순서에 따라서 번호기입, 매서드 매개변수로 받아옴
+		st.setString(1, departmentDTO.getDepartment_name());
+		st.setInt(2, departmentDTO.getManager_id());
+		st.setInt(3, departmentDTO.getLocation_id());
+		
+		int result = st.executeUpdate();
+		
+		DBConnection.disConnect(st, con);
+		
+		return result;
+				
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 		public DepartmentDTO getDetail(int department_id) throws Exception{
 			

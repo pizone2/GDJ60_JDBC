@@ -1,10 +1,13 @@
 package com.iu.main;
 
+import javax.crypto.spec.DESedeKeySpec;
 import javax.tools.DocumentationTool.Location;
 
 import com.iu.main.departments.DepartmentController;
 import com.iu.main.departments.DepartmentDAO;
+import com.iu.main.departments.DepartmentDTO;
 import com.iu.main.employees.EmployeesController;
+import com.iu.main.employees.EmployeesDAO;
 import com.iu.main.locations.LocationController;
 import com.iu.main.locations.LocationDAO;
 import com.iu.main.util.DBConnection;
@@ -21,44 +24,64 @@ public class JDBCMain {
 		DepartmentController dc = new DepartmentController();
 		LocationController lc = new LocationController();
 		EmployeesController ec = new EmployeesController();
+		DepartmentDAO departmentDAO = new DepartmentDAO();
+		EmployeesDAO employeesDAO = new EmployeesDAO();
 		
 		try {
-			ec.start();
+			employeesDAO.getAvg();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+		try {
+			dc.start();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
+		
 //		try {
-//			dao2.getList();
+//			DepartmentDTO departmentDTO = new DepartmentDTO();
+//			departmentDTO.setDepartment_id(280);
 //			
-//		} catch (Exception e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-		
-//		try {
-////			dao.getList();
-//			dao.getDetail(20);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		try {
-//			dc.start();
+//			int result = departmentDAO.deleteData(departmentDTO);
+//			if(result>0) {
+//				System.out.println("성공");
+//			}else {
+//				System.out.println("실패");
+//			}
+//			
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 		
 		
-		//↓ throws Exception을 받아서 try catch	
+		
 //		try {
-//			lc.start();
+//			DepartmentDTO departmentDTO = new DepartmentDTO();
+//			
+//			departmentDTO.setDepartment_name("TestIT");
+//			departmentDTO.setManager_id(200);
+//			departmentDTO.setLocation_id(1700);
+//			int result = departmentDAO.setData(departmentDTO);
+//			if(result>0) {
+//				System.out.println("성공");
+//			}else {
+//				System.out.println("실패");
+//			}
+//			
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
+
 	
 		System.out.println("finish");
 	
