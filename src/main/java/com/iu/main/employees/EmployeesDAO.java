@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
@@ -15,7 +16,10 @@ import oracle.jdbc.proxy.annotation.Pre;
 public class EmployeesDAO {
 	
 	//월급의 평균
-	public void getAvg() throws Exception{
+	public HashMap<String, Double> getAvg() throws Exception{
+		
+		HashMap<String, Double> map = new HashMap<String, Double>();
+		
 		Connection con = DBConnection.getConnection();
 		
 		String sql = "SELECT AVG(SALARY),SUM(SALARY) FROM EMPLOYEES";
@@ -25,11 +29,26 @@ public class EmployeesDAO {
 		ResultSet rs = st.executeQuery();
 		
 		rs.next();
+		//최후의 수단
+//		EmployeesDTO employeesDTO = new EmployeesDTO();
+//		employeesDTO.setSalary(rs.getDouble(0));
+//		employeesDTO.setCommission_pct(rs.getDouble(0));
+		
+		
+//		1.List,Array //몇번 인덱스에 무엇이 들어갔는지 설명해야함
+//		2.DTO (Class) // 다른곳에서 사용하면 사용,이곳에서만 사용할꺼면 Class까지 만들기는 아까움
+//		3.Map(Key,Value)
+		
+		map.put("avg", rs.getDouble(1));
+		map.put("sum", rs.getDouble(2));
+		
 		
 		System.out.println(rs.getDouble(1));
 		System.out.println(rs.getDouble(2));
 		
 		DBConnection.disConnect(rs, st, con);
+		
+		return map;
 		
 	}
 	
@@ -115,7 +134,7 @@ public class EmployeesDAO {
 		st.setString(0, employeesDTO.getLast_name());
 		st.setString(0, employeesDTO.getEmail());
 		st.setString(0, employeesDTO.getPhone_number());
-		st.setDate(0, employeesDTO.getHire_date());
+		st.setString(0, employeesDTO.getHire_date());
 		st.setString(0, employeesDTO.getJob_id());
 		st.setDouble(0, employeesDTO.getSalary());
 		st.setDouble(0, employeesDTO.getCommission_pct());
@@ -158,7 +177,7 @@ public class EmployeesDAO {
 			employeesDTO.setLast_name(rs.getString("LAST_NAME"));
 			employeesDTO.setEmail(rs.getString("EMAIL"));
 			employeesDTO.setPhone_number(rs.getString("PHONE_NAMBER"));
-			employeesDTO.setHire_date(rs.getDate("HIRE_DATE"));
+			employeesDTO.setHire_date(rs.getString("HIRE_DATE"));
 			employeesDTO.setJob_id(rs.getString("JOB_ID"));
 			employeesDTO.setSalary(rs.getDouble("SALARY"));
 			employeesDTO.setCommission_pct(rs.getDouble("COMMISSION_PCT"));
@@ -200,7 +219,7 @@ public class EmployeesDAO {
 			employeesDTO.setLast_name(rs.getString("LAST_NAME"));
 			employeesDTO.setEmail(rs.getString("EMAIL"));
 			employeesDTO.setPhone_number(rs.getString("PHONE_NAMBER"));
-			employeesDTO.setHire_date(rs.getDate("HIRE_DATE"));
+			employeesDTO.setHire_date(rs.getString("HIRE_DATE"));
 			employeesDTO.setJob_id(rs.getString("JOB_ID"));
 			employeesDTO.setSalary(rs.getDouble("SALARY"));
 			employeesDTO.setCommission_pct(rs.getDouble("COMMISSION_PCT"));

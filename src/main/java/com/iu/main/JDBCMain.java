@@ -17,27 +17,22 @@ public class JDBCMain {
 	public static void main(String[] args) {
 		System.out.println("start");
 		
+		FrontController fc = new FrontController();
 		
 		//↓ 객체선언
-		LocationDAO dao2 = new LocationDAO();
-		DepartmentDAO dao = new DepartmentDAO();
-		DepartmentController dc = new DepartmentController();
-		LocationController lc = new LocationController();
-		EmployeesController ec = new EmployeesController();
-		DepartmentDAO departmentDAO = new DepartmentDAO();
-		EmployeesDAO employeesDAO = new EmployeesDAO();
+//		LocationDAO dao2 = new LocationDAO();
+//		DepartmentDAO dao = new DepartmentDAO();
+//		DepartmentController dc = new DepartmentController();
+//		LocationController lc = new LocationController();
+//		EmployeesController ec = new EmployeesController();
+//		DepartmentDAO departmentDAO = new DepartmentDAO();
+//		EmployeesDAO employeesDAO = new EmployeesDAO();
 		
-		try {
-			employeesDAO.getAvg();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+				
 		
 		
 		try {
-			dc.start();
+			fc.start();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
