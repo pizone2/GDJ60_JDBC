@@ -37,8 +37,8 @@ public class FrontController {
 				break;
 //			case 3:
 //				this.
-				break;
-			default
+//				break;
+			default:
 				check = false;
 				break;
 				
