@@ -2,6 +2,8 @@ package com.iu.main.employees;
 
 import java.sql.Date;
 
+import com.iu.main.departments.DepartmentDTO;
+
 public class EmployeesDTO {
 
 	//변수의 이름은 db와 똑같이 작성
@@ -16,6 +18,10 @@ public class EmployeesDTO {
 	private	double commission_pct;
 	private Integer	manager_id;
 	private Integer	department_id;
+	
+	//1:1관계
+	private DepartmentDTO departmentDTO;
+	
 	
 	public Integer getEmployee_id() {
 		return employee_id;
